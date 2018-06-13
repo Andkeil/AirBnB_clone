@@ -21,6 +21,9 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = '(hbnb) '
 
+    classes = ['BaseModel', 'User', 'State', 'City',
+               'Amenity', 'Place', 'Review']
+
     def do_EOF(self, line):
         """
         Method to exit with EOF command
@@ -64,10 +67,17 @@ class HBNBCommand(cmd.Cmd):
         """
         if not line:
             print("** class name missing **")
+        elif line in self.classes:
+            instance = eval(line)()
+            instance.save()
+            print(instance.id)
         else:
+            print("** class doesn't exist **")
+
+            """        else:
             args = line.split()
             if args[0] is None:
-                print("** class name missing**")
+                print("** class name missing **")
             else:
                 valid_cls = check_class(args[0])
                 if valid_cls is not None:
@@ -75,7 +85,7 @@ class HBNBCommand(cmd.Cmd):
                     instance.save()
                     print(instance.id)
                 else:
-                    print("** class doesn't exist **")
+                    print("** class doesn't exist **") """
 
     def do_show(self, line):
         """
