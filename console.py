@@ -131,10 +131,23 @@ class HBNBCommand(cmd.Cmd):
         """
         Method destroys an instance
         """
+        args = line.split()
         if not line:
             print("** class name missing **")
+        elif args[0] not in self.classes:
+            print("** class doesn't exist **")
+        elif len(args) == 1:
+            print("** instance id missing **")
         else:
-            args = line.split()
+            if args[0] is not None:
+                obj = storage.all()
+                #key = str(args[0]) + '.' str(args[1])
+                try:
+                    del obj[key]
+                    storage.save()
+                except:
+                    print("** no instance found **")
+        """else:
             if not args[0]:
                 print("** class name missing **")
             try:
@@ -154,7 +167,7 @@ class HBNBCommand(cmd.Cmd):
                     except:
                         print("** no instance found **")
                 else:
-                    print("** class doesn't exist **")
+                    print("** class doesn't exist **")"""
 
     def do_all(self, line):
         """
