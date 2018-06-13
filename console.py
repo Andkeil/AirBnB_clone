@@ -73,7 +73,6 @@ class HBNBCommand(cmd.Cmd):
             print(instance.id)
         else:
             print("** class doesn't exist **")
-
             """        else:
             args = line.split()
             if args[0] is None:
@@ -91,9 +90,24 @@ class HBNBCommand(cmd.Cmd):
         """
         Method show str rep of instance using cls name and id
         """
+
+        args = line.split()
         if not line:
             print("** class name missing **")
+        elif args[0] not in self.classes:
+            print("** class doesn't exist **")
+        elif len(args) == 1:
+            print("** instance id missing **")
         else:
+            if args[0] is not None:
+                obj = storage.all()
+                key = str(args[0]) + '.' + str(args[1])
+                try:
+                    print(obj[key])
+                except:
+                    print("** no instance found **")
+
+        """else:
             args = line.split()
             if not args[0]:
                 print("** class name missing **")
@@ -111,7 +125,7 @@ class HBNBCommand(cmd.Cmd):
                     except:
                         print("** no instance found **")
                 else:
-                    print("** class doesn't exist **")
+                    print("** class doesn't exist **")"""
 
     def do_destroy(self, line):
         """
