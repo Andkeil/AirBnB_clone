@@ -175,7 +175,14 @@ class HBNBCommand(cmd.Cmd):
         """
         args = line.split()
         obj = storage.all()
-        counter = 0
+        list = []
+        if line == "" or line in self.classes:
+            for key, value in (obj.items()):
+                list.append(value)
+            print(list)
+        else:
+            print("** class doesn't exist **")
+        """counter = 0
         try:
             args[0]
             valid_class = check_class(args[0])
@@ -193,7 +200,7 @@ class HBNBCommand(cmd.Cmd):
                 print(obj[key])
                 counter += 1
             if counter == 0:
-                print([])
+                print([])"""
 
     def do_update(self, line):
         """
